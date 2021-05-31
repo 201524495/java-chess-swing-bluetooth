@@ -74,15 +74,15 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 
     protected void drawExtra(Graphics g) {
         System.err.println("windowchessboard, drawextra() being running");
-        
+
         initialBoardPaint(g); // Initialized Board Painting Instruction
 
         if (isDragging) {
-            g.drawImage((imgPlayer[currentPlayer - 1][pieceBeingDragged].getImage()), 
+            g.drawImage((imgPlayer[currentPlayer - 1][pieceBeingDragged].getImage()),
             		(currentX - 25), (currentY - 25), this);
         }
-        
-        boardDesign(g); // color, text style ... 
+
+        boardDesign(g); // color, text style ...
 
         vecPaintInstructions.clear(); //clear all paint instructions
     }
@@ -111,7 +111,7 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 
                     if (playerCell != 0) {
                         try {
-                            g.drawImage((imgPlayer[playerCell - 1][pieceCell].getImage()), 
+                            g.drawImage((imgPlayer[playerCell - 1][pieceCell].getImage()),
                             		((column + 1) * 50) - 45, ((row + 1) * 50) - 45, this);
                         } catch (ArrayIndexOutOfBoundsException e) {
                         }
@@ -191,14 +191,14 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
                     newDesColumn = pieceFactory.king.getDesColumn();
                     break;
             }
-            
+
             // save current position
             saveCurrentPosition(newDesRow, newDesColumn);
 
             // set current move position
             setCurrentMovePosition(newDesRow, newDesColumn);
 
-            // Where is King 
+            // Where is King
             getKingPosition();
 
             System.err.println("KingRow= " + kingRow + " KingCol= " + kingCol);
@@ -278,26 +278,26 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
         kingRow = cellMatrix.getKingRow(curPlayer);
         kingCol = cellMatrix.getKingCol(curPlayer);
 
-        boolean checkRight = true, checkDownRightDiagonal = true, checkDown = true, checkDownLeftDiagonal = true, 
+        boolean checkRight = true, checkDownRightDiagonal = true, checkDown = true, checkDownLeftDiagonal = true,
         		checkLeft = true, checkUpperLeftDiagonal = true, checkUp = true, checkUpperRightDiagonal = true;
      // 말의 오른쪽
         checkRight = checkCases(curPlayer, checkRight, kingRow+1, kingCol);
      // 말의 우측 아래 대각선
-        checkDownRightDiagonal = checkCases(curPlayer, checkDownRightDiagonal, kingRow+1, kingCol-1); 
+        checkDownRightDiagonal = checkCases(curPlayer, checkDownRightDiagonal, kingRow+1, kingCol-1);
      // 말의 아래쪽
-        checkDown = checkCases(curPlayer, checkDown, kingRow, kingCol-1); 
+        checkDown = checkCases(curPlayer, checkDown, kingRow, kingCol-1);
      // 말의 좌측 아래 대각선
-        checkDownLeftDiagonal = checkCases(curPlayer, checkDownLeftDiagonal, kingRow-1, kingCol-1); 
+        checkDownLeftDiagonal = checkCases(curPlayer, checkDownLeftDiagonal, kingRow-1, kingCol-1);
      // 말의 왼쪽
-        checkLeft = checkCases(curPlayer, checkLeft, kingRow-1, kingCol); 
+        checkLeft = checkCases(curPlayer, checkLeft, kingRow-1, kingCol);
      // 말의 좌측 위 대각선
-        checkUpperLeftDiagonal = checkCases(curPlayer, checkUpperLeftDiagonal, kingRow-1, kingCol+1); 
+        checkUpperLeftDiagonal = checkCases(curPlayer, checkUpperLeftDiagonal, kingRow-1, kingCol+1);
      // 말의 위쪽
-        checkUp = checkCases(curPlayer, checkUp, kingRow, kingCol+1); 
+        checkUp = checkCases(curPlayer, checkUp, kingRow, kingCol+1);
      // 말의 우측 위 대각선
-        checkUpperRightDiagonal = checkCases(curPlayer, checkUpperRightDiagonal, kingRow+1, kingCol+1); 
+        checkUpperRightDiagonal = checkCases(curPlayer, checkUpperRightDiagonal, kingRow+1, kingCol+1);
 
-        if (checkRight && checkDownRightDiagonal && checkDown && checkDownLeftDiagonal && 
+        if (checkRight && checkDownRightDiagonal && checkDown && checkDownLeftDiagonal &&
         		checkLeft && checkUpperLeftDiagonal && checkUp && checkUpperRightDiagonal) {
             return true;
         }
@@ -307,15 +307,10 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 	private boolean checkCases(int curPlayer, boolean checkCase, int newKingRow, int newKingCol) {
 		boolean isLegalMove;
 		boolean isSafe;
-		final boolean isNewKingPosition = newKingRow >= 0 && newKingRow <= 7  && 
+		final boolean isNewKingPosition = newKingRow >= 0 && newKingRow <= 7  &&
 				newKingCol >= 0 && newKingCol <= 8;
 		if (isNewKingPosition) {
-<<<<<<< HEAD
-            isLegalMove = kingObject.legalMove(kingRow, kingCol, newKingRow, newKingCol, 
-            		cellMatrix.getPlayerMatrix());
-=======
             isLegalMove = pieceFactory.king.legalMove(kingRow, kingCol, newKingRow, newKingCol, cellMatrix.getPlayerMatrix());
->>>>>>> upstream/master
             isSafe = cellMatrix.isKingSafe(curPlayer, newKingRow, newKingCol);
             if (!isLegalMove || !isSafe) {
                 checkCase = true;
@@ -356,7 +351,7 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
             int xTouchedLocation = e.getX();
             int yTouchedLocation = e.getY();
 
-            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) 
+            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405)
             		&& (yTouchedLocation > 5 && yTouchedLocation < 405);
 			if (isTouchInside) //in the correct bounds
             {
@@ -373,7 +368,7 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 
                 } else {
                     isDragging = false;
-                    
+
                 }
             }
         }
@@ -419,7 +414,7 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
             int xTouchedLocation = e.getX();
             int yTouchedLocation = e.getY();
 
-            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) && 
+            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) &&
             		(yTouchedLocation > 5 && yTouchedLocation < 405);
 			if (isTouchInside) //in the correct bounds
             {
