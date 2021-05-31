@@ -82,7 +82,8 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
         initialBoardPaint(g); // Initialized Board Painting Instruction
 
         if (isDragging) {
-            g.drawImage((imgPlayer[currentPlayer - 1][pieceBeingDragged].getImage()), (currentX - 25), (currentY - 25), this);
+            g.drawImage((imgPlayer[currentPlayer - 1][pieceBeingDragged].getImage()), 
+            		(currentX - 25), (currentY - 25), this);
         }
         
         boardDesign(g); // color, text style ... 
@@ -114,7 +115,8 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 
                     if (playerCell != 0) {
                         try {
-                            g.drawImage((imgPlayer[playerCell - 1][pieceCell].getImage()), ((column + 1) * 50) - 45, ((row + 1) * 50) - 45, this);
+                            g.drawImage((imgPlayer[playerCell - 1][pieceCell].getImage()), 
+                            		((column + 1) * 50) - 45, ((row + 1) * 50) - 45, this);
                         } catch (ArrayIndexOutOfBoundsException e) {
                         }
                     }
@@ -282,22 +284,22 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 
         boolean checkRight = true, checkDownRightDiagonal = true, checkDown = true, checkDownLeftDiagonal = true, 
         		checkLeft = true, checkUpperLeftDiagonal = true, checkUp = true, checkUpperRightDiagonal = true;
-
-        checkRight = checkCases(curPlayer, checkRight, kingRow+1, kingCol); // 말의 오른쪽
-
-        checkDownRightDiagonal = checkCases(curPlayer, checkDownRightDiagonal, kingRow+1, kingCol-1); // 말의 우측 아래 대각선
-
-        checkDown = checkCases(curPlayer, checkDown, kingRow, kingCol-1); // 말의 아래쪽
-
-        checkDownLeftDiagonal = checkCases(curPlayer, checkDownLeftDiagonal, kingRow-1, kingCol-1); // 말의 좌측 아래 대각선
-
-        checkLeft = checkCases(curPlayer, checkLeft, kingRow-1, kingCol); // 말의 왼쪽
-
-        checkUpperLeftDiagonal = checkCases(curPlayer, checkUpperLeftDiagonal, kingRow-1, kingCol+1); // 말의 좌측 위 대각선
-
-        checkUp = checkCases(curPlayer, checkUp, kingRow, kingCol+1); // 말의 위쪽
-
-        checkUpperRightDiagonal = checkCases(curPlayer, checkUpperRightDiagonal, kingRow+1, kingCol+1); // 말의 우측 위 대각선
+     // 말의 오른쪽
+        checkRight = checkCases(curPlayer, checkRight, kingRow+1, kingCol);
+     // 말의 우측 아래 대각선
+        checkDownRightDiagonal = checkCases(curPlayer, checkDownRightDiagonal, kingRow+1, kingCol-1); 
+     // 말의 아래쪽
+        checkDown = checkCases(curPlayer, checkDown, kingRow, kingCol-1); 
+     // 말의 좌측 아래 대각선
+        checkDownLeftDiagonal = checkCases(curPlayer, checkDownLeftDiagonal, kingRow-1, kingCol-1); 
+     // 말의 왼쪽
+        checkLeft = checkCases(curPlayer, checkLeft, kingRow-1, kingCol); 
+     // 말의 좌측 위 대각선
+        checkUpperLeftDiagonal = checkCases(curPlayer, checkUpperLeftDiagonal, kingRow-1, kingCol+1); 
+     // 말의 위쪽
+        checkUp = checkCases(curPlayer, checkUp, kingRow, kingCol+1); 
+     // 말의 우측 위 대각선
+        checkUpperRightDiagonal = checkCases(curPlayer, checkUpperRightDiagonal, kingRow+1, kingCol+1); 
 
         if (checkRight && checkDownRightDiagonal && checkDown && checkDownLeftDiagonal && 
         		checkLeft && checkUpperLeftDiagonal && checkUp && checkUpperRightDiagonal) {
@@ -309,9 +311,11 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
 	private boolean checkCases(int curPlayer, boolean checkCase, int newKingRow, int newKingCol) {
 		boolean isLegalMove;
 		boolean isSafe;
-		final boolean isNewKingPosition = newKingRow >= 0 && newKingRow <= 7  && newKingCol >= 0 && newKingCol <= 8;
+		final boolean isNewKingPosition = newKingRow >= 0 && newKingRow <= 7  && 
+				newKingCol >= 0 && newKingCol <= 8;
 		if (isNewKingPosition) {
-            isLegalMove = kingObject.legalMove(kingRow, kingCol, newKingRow, newKingCol, cellMatrix.getPlayerMatrix());
+            isLegalMove = kingObject.legalMove(kingRow, kingCol, newKingRow, newKingCol, 
+            		cellMatrix.getPlayerMatrix());
             isSafe = cellMatrix.isKingSafe(curPlayer, newKingRow, newKingCol);
             if (!isLegalMove || !isSafe) {
                 checkCase = true;
@@ -352,7 +356,8 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
             int xTouchedLocation = e.getX();
             int yTouchedLocation = e.getY();
 
-            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) && (yTouchedLocation > 5 && yTouchedLocation < 405);
+            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) 
+            		&& (yTouchedLocation > 5 && yTouchedLocation < 405);
 			if (isTouchInside) //in the correct bounds
             {
                 //find startRow and StartColumn from where the player clicks on the board
@@ -414,7 +419,8 @@ public class WindowChessGameSingle extends ChessBoard implements MouseListener, 
             int xTouchedLocation = e.getX();
             int yTouchedLocation = e.getY();
 
-            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) && (yTouchedLocation > 5 && yTouchedLocation < 405);
+            final boolean isTouchInside = (xTouchedLocation > 5 && xTouchedLocation < 405) && 
+            		(yTouchedLocation > 5 && yTouchedLocation < 405);
 			if (isTouchInside) //in the correct bounds
             {
                 if (refreshCounter >= refreshRate) {
